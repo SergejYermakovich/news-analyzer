@@ -1,3 +1,6 @@
 spring:
   application:
-    name: News Analizer
+    name: News Analyzer
+bot:
+  name: ${TG_BOT_NAME}
+  token: ${TG_BOT_TOKEN}
