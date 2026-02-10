@@ -1,9 +1,10 @@
-package tech.ermakovich.service;
+package tech.ermakovich.service.handler;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import tech.ermakovich.service.MessageSender;
 
 @Slf4j
 @Component

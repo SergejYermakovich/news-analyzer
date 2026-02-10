@@ -9,8 +9,8 @@ import org.telegram.telegrambots.longpolling.TelegramBotsLongPollingApplication;
 import org.telegram.telegrambots.longpolling.interfaces.LongPollingUpdateConsumer;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import tech.ermakovich.config.BotConfig;
-import tech.ermakovich.service.GlobalUpdateExceptionHandler;
-import tech.ermakovich.service.UpdateProcessor;
+import tech.ermakovich.service.handler.GlobalUpdateExceptionHandler;
+import tech.ermakovich.service.processor.UpdateProcessor;
 
 import java.util.List;
 
