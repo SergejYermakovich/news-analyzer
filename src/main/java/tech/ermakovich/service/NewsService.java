@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
+import tech.ermakovich.model.dto.Article;
 import tech.ermakovich.model.dto.NewsApiResponse;
 
 import java.time.LocalDate;
@@ -46,13 +47,17 @@ public class NewsService {
                 .retrieve()
                 .bodyToMono(NewsApiResponse.class)
                 .map(response -> response.getArticles().stream()
-                        .map(article -> article.getTitle() + "\n" +
-                                (article.getDescription() != null ? article.getDescription() : ""))
+                        .map(this::mapArticle)
                         .limit(count)
                         .toList())
                 .onErrorResume(e -> {
                     log.warn("Ошибка получения новостей, возвращаем пустой список", e);
                     return Mono.just(List.of());
                 });
+    }
+
+    private String mapArticle(Article article) {
+        return "Title: " + article.getTitle() + "\n" +
+                "Description: " + (article.getDescription() != null ? article.getDescription() : "") + "\n";
     }
 }
