@@ -30,9 +30,6 @@ public class AnswerGenerator {
 
         log.info("|CHAT_ID: {} | All news are set.", chatId);
 
-        String finalResponse = analysisService.generateBusinessIdeas(allNews);
-        return finalResponse;
+        return analysisService.generateBusinessIdeas(chatId, allNews).block();
     }
-
-
 }
