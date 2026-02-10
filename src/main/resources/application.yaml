@@ -1,6 +1,9 @@
 spring:
   application:
     name: News Analyzer
+  ai:
+    deepseek:
+      api-key: ${DEEPSEEK_API_KEY}
 bot:
   name: ${TG_BOT_NAME}
   token: ${TG_BOT_TOKEN}
