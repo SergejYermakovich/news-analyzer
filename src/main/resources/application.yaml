@@ -4,6 +4,10 @@ spring:
   ai:
     deepseek:
       api-key: ${DEEPSEEK_API_KEY}
+      chat:
+        options:
+          model: deepseek-chat
+          temperature: 0.8
 bot:
   name: ${TG_BOT_NAME}
   token: ${TG_BOT_TOKEN}

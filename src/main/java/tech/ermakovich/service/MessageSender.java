@@ -1,4 +1,4 @@
-package tech.ermakovich;
+package tech.ermakovich.service;
 
 import org.springframework.stereotype.Service;
 

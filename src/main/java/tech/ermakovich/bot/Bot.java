@@ -1,4 +1,4 @@
-package tech.ermakovich;
+package tech.ermakovich.bot;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
@@ -9,22 +9,27 @@ import org.telegram.telegrambots.longpolling.TelegramBotsLongPollingApplication;
 import org.telegram.telegrambots.longpolling.interfaces.LongPollingUpdateConsumer;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import tech.ermakovich.config.BotConfig;
+import tech.ermakovich.service.GlobalUpdateExceptionHandler;
+import tech.ermakovich.service.UpdateProcessor;
 
 import java.util.List;
 
 @Slf4j
 @Service
 public class Bot implements LongPollingUpdateConsumer {
-    private final BotConfig botConfig;
     private BotSession botSession;
     private TelegramBotsLongPollingApplication botsApplication;
+    private final BotConfig botConfig;
     private final GlobalUpdateExceptionHandler exceptionHandler;
+    private final UpdateProcessor updateProcessor;
 
     public Bot(BotConfig botConfig,
-               GlobalUpdateExceptionHandler exceptionHandler
+               GlobalUpdateExceptionHandler exceptionHandler,
+               UpdateProcessor updateProcessor
     ) {
         this.botConfig = botConfig;
         this.exceptionHandler = exceptionHandler;
+        this.updateProcessor = updateProcessor;
     }
 
     @Override
@@ -44,10 +49,7 @@ public class Bot implements LongPollingUpdateConsumer {
                 log.warn("Received null update, skipping");
                 return;
             }
-
-            System.out.println("U");
-
-
+            updateProcessor.process(update);
         } catch (Exception e) {
             exceptionHandler.handleException(update, e);
         }
