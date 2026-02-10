@@ -32,7 +32,6 @@ public class DeepSeekWebClient {
 
     public Mono<String> send(Long chatId,
                              String userMessage) {
-        log.info("question from User with chat id {}: {} in thread {}", chatId, userMessage, Thread.currentThread().getName());
         LocalTime startTime = LocalTime.now();
         ChatRequest chatRequest = chatRequestGenerator.generateChatRequest(userMessage);
         return webClient.post()
