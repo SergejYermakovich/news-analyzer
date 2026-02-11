@@ -16,7 +16,7 @@ public class CommandHandler {
     private final AnswerGenerator answerGenerator;
     private final MessageSender messageSender;
 
-    public void handleCommand(String command, Long chatId) {
+    public void handleCommand( Long chatId, String command) {
         switch (command) {
             case START:
                 handleStart(chatId);
