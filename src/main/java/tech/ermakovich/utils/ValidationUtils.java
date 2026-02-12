@@ -1,7 +1,7 @@
 package tech.ermakovich.utils;
 
 import lombok.experimental.UtilityClass;
-import tech.ermakovich.model.dto.ChatResponse;
+import tech.ermakovich.model.dto.ai.ChatResponse;
 import tech.ermakovich.model.exception.DeepSeekIntegrationException;
 
 @UtilityClass

@@ -21,13 +21,13 @@ public class UpdateProcessor {
             Long chatId = update.getMessage().getChatId();
             String username = update.getMessage().getFrom().getUserName();
 
-            log.info("Получено сообщение от @{}: {}", username, messageText);
+            log.debug("Получено сообщение от @{}: {}", username, messageText);
 
             try {
                 if (isCommand(messageText)) {
-                    commandHandler.handleCommand(messageText, chatId);
+                    commandHandler.handleCommand(chatId, messageText);
                 } else {
-                    messageHandler.handleMessage(messageText, chatId, username);
+                    messageHandler.handleMessage(chatId, messageText, username);
                 }
             } catch (Exception e) {
                 log.error("Ошибка обработки сообщения", e);

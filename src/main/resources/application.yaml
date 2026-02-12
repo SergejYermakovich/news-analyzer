@@ -8,6 +8,7 @@ bot:
 deepseek:
   api:
     url: https://api.deepseek.com/v1/chat/completions
+    key: ${DEEPSEEK_API_KEY}
   model: deepseek-chat
   system:
     role: system
