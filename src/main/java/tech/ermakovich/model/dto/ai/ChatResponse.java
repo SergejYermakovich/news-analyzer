@@ -1,4 +1,4 @@
-package tech.ermakovich.model.dto;
+package tech.ermakovich.model.dto.ai;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import tech.ermakovich.model.dto.ChatRequest;
-import tech.ermakovich.model.dto.Message;
+import tech.ermakovich.model.dto.ai.ChatRequest;
+import tech.ermakovich.model.dto.ai.Message;
 import tech.ermakovich.utils.Prompts;
 
 import java.util.List;

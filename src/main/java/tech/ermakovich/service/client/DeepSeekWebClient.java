@@ -1,4 +1,4 @@
-package tech.ermakovich.service;
+package tech.ermakovich.service.client;
 
 
 import lombok.RequiredArgsConstructor;
@@ -9,9 +9,10 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
-import tech.ermakovich.model.dto.ChatRequest;
-import tech.ermakovich.model.dto.ChatResponse;
+import tech.ermakovich.model.dto.ai.ChatRequest;
+import tech.ermakovich.model.dto.ai.ChatResponse;
 import tech.ermakovich.model.exception.DeepSeekIntegrationException;
+import tech.ermakovich.service.ChatRequestGenerator;
 import tech.ermakovich.utils.ValidationUtils;
 
 import java.time.Duration;
