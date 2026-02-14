@@ -9,7 +9,7 @@ public class WebClientConfig {
     @Bean
     public WebClient webClient() {
         return WebClient.builder()
-                .baseUrl("https://newsapi.org/v2")
+//                .baseUrl("https://newsapi.org/v2")
                 .build();
     }
 }

@@ -4,6 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import tech.ermakovich.service.MessageSender;
+import tech.ermakovich.service.factory.SourceKeyboardFactory;
+
+import java.util.ArrayList;
 
 import static tech.ermakovich.utils.BotCommands.MY_SOURCES_BTN;
 
@@ -11,10 +14,14 @@ import static tech.ermakovich.utils.BotCommands.MY_SOURCES_BTN;
 @Service
 public class MySourcesHandler implements CommandHandler {
     private final MessageSender messageSender;
+    private final SourceKeyboardFactory sourceKeyboardFactory;
 
     @Override
     public void handle(long chatId, Update update) {
-        messageSender.sendMessage(chatId, "MySourcesHandler");
+        messageSender.sendMessage(chatId, "MY SOURCES:\n", sourceKeyboardFactory.createSourcesKeyboard(
+                chatId,
+                false
+        ));
     }
 
     @Override

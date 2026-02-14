@@ -45,7 +45,7 @@ public class UserService {
 
     private Subscriptions createDefaultSubscriptions() {
         Subscriptions subs = new Subscriptions();
-        subs.setSources(List.of("rbc.ru", "vc.ru"));
+        subs.setSources(List.of("1"));
         subs.setCategories(List.of("tech", "business"));
         subs.setKeywords(new ArrayList<>());
         return subs;
