@@ -6,8 +6,6 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import tech.ermakovich.service.MessageSender;
 import tech.ermakovich.service.factory.SourceKeyboardFactory;
 
-import java.util.ArrayList;
-
 import static tech.ermakovich.utils.BotCommands.MY_SOURCES_BTN;
 
 @RequiredArgsConstructor
@@ -19,9 +17,10 @@ public class MySourcesHandler implements CommandHandler {
     @Override
     public void handle(long chatId, Update update) {
         messageSender.sendMessage(chatId, "MY SOURCES:\n", sourceKeyboardFactory.createSourcesKeyboard(
-                chatId,
-                false
-        ));
+                        chatId,
+                        false
+                )
+        );
     }
 
     @Override

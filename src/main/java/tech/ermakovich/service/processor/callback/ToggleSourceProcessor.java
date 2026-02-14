@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 import tech.ermakovich.model.entity.User;
+import tech.ermakovich.service.MessageSender;
 import tech.ermakovich.service.UserService;
 
 
@@ -16,6 +17,7 @@ import static tech.ermakovich.utils.callback.CallbackKeys.TOGGLE_SOURCE;
 public class ToggleSourceProcessor implements CallbackDataProcessor {
 
     private final UserService userService;
+    private final MessageSender messageSender;
 
     @Override
     public void process(CallbackQuery callbackQuery) {
@@ -26,6 +28,9 @@ public class ToggleSourceProcessor implements CallbackDataProcessor {
         ToggleUpdate toggleUpdate = parseData(data);
 
         updateSource(user, toggleUpdate);
+
+        int messageId = callbackQuery.getMessage().getMessageId();
+        messageSender.updateKeyboard(chatId, messageId);
     }
 
     private void updateSource(User user, ToggleUpdate toggleUpdate) {

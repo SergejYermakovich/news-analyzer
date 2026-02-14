@@ -23,7 +23,7 @@ public class GenerateIdeaHandler implements CommandHandler {
     public void handle(long chatId, Update update) {
         User user = userService.getOrCreate(chatId);
 
-        String message = answerGenerator.generate(chatId, "SEX", 1);
+        String message = answerGenerator.generate(chatId, "IT", 1);
         messageSender.sendMessage(chatId, message);
     }
 
