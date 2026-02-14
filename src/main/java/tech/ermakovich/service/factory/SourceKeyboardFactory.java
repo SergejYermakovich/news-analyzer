@@ -13,6 +13,9 @@ import tech.ermakovich.service.UserService;
 import java.util.ArrayList;
 
 import java.util.List;
+import java.util.Set;
+
+import static tech.ermakovich.utils.callback.CallbackKeys.TOGGLE_SOURCE;
 
 @RequiredArgsConstructor
 @Component
@@ -20,38 +23,38 @@ public class SourceKeyboardFactory {
     private final SourceService sourceService;
     private final UserService userService;
 
+    private static final String DELIMITER =  ":";
+
     public InlineKeyboardMarkup createSourcesKeyboard(
             long chatId,
             boolean showDoneButton   // для онбординга
     ) {
         List<Source> allSources = sourceService.getAll();
         User user = userService.getOrCreate(chatId);
-        List<String> subscribedSourceIds = user.getSubscriptions().getSources();
+        Set<String> subscribedSourceIds = user.getSubscriptions().getSources();
 
 
         List<InlineKeyboardRow> rows = new ArrayList<>();
 
-        // Для каждого источника создаём кнопку с ✅/⬜
         for (Source source : allSources) {
-            String buttonText = (subscribedSourceIds.contains(source.getId())
-                    ? "✅ " : "⬜ ") + source.getName();
+            boolean isOn = subscribedSourceIds.contains(source.getId());
+            String buttonText = (isOn ? "✅ " : "⬜ ") + source.getName();
 
             InlineKeyboardButton button = InlineKeyboardButton.builder()
                     .text(buttonText)
-                    .callbackData("TOGGLE_SOURCE:" + source.getId())
+                    .callbackData(TOGGLE_SOURCE + DELIMITER + source.getId() + DELIMITER + isOn)
                     .build();
 
             rows.add(new InlineKeyboardRow(button));
         }
 
-        // Добавляем кнопку "Назад"
         InlineKeyboardRow navRow = new InlineKeyboardRow();
         navRow.add(InlineKeyboardButton.builder()
                 .text("🔙 Назад")
                 .callbackData("BACK_TO_MAIN")
                 .build());
 
-        // Если нужно, добавляем "Готово" (для онбординга)
+        // "Готово" (для онбординга)
         if (showDoneButton) {
             navRow.add(InlineKeyboardButton.builder()
                     .text("✅ Готово")

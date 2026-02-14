@@ -21,12 +21,12 @@ public class SourceRepository {
                         .build(),
                 Source.builder()
                         .id("2")
-                        .url("test.com")
+                        .url("test.com/1")
                         .name("test 1")
                         .build(),
                 Source.builder()
                         .id("3")
-                        .url("test.com  ")
+                        .url("test.com/2")
                         .name("test 2")
                         .build()
         );

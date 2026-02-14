@@ -12,7 +12,9 @@ import tech.ermakovich.model.exception.UserNotFoundException;
 import tech.ermakovich.repository.UserRepository;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -21,12 +23,12 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public User getOrCreate(Long telegramId) {
-        return userRepository.findById(telegramId)
+    public User getOrCreate(Long id) {
+        return userRepository.findById(id)
                 .orElseGet(() -> {
-                    log.info("Создание нового пользователя: {}", telegramId);
+                    log.info("Создание нового пользователя: {}", id);
                     User newUser = User.builder()
-                            .telegramId(telegramId)
+                            .telegramId(id)
                             .subscriptions(createDefaultSubscriptions())
                             .budget(createDefaultBudget())
                             .deliverySettings(createDefaultDeliverySettings())
@@ -37,17 +39,20 @@ public class UserService {
     }
 
 
-    public User getById(Long telegramId) {
-        return userRepository.findById(telegramId)
-                .orElseThrow(() -> new UserNotFoundException("Пользователь не найден: " + telegramId));
+    public User getById(Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("Пользователь не найден: " + id));
     }
 
 
     private Subscriptions createDefaultSubscriptions() {
+        Set<String> sources = new HashSet<>();
+        sources.add("1");
+
         Subscriptions subs = new Subscriptions();
-        subs.setSources(List.of("1"));
-        subs.setCategories(List.of("tech", "business"));
-        subs.setKeywords(new ArrayList<>());
+        subs.setSources(sources);
+        subs.setCategories(Set.of("tech", "business"));
+        subs.setKeywords(new HashSet<>());
         return subs;
     }
 
