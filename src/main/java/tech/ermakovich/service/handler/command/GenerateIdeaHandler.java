@@ -4,8 +4,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import tech.ermakovich.model.entity.User;
 import tech.ermakovich.service.AnswerGenerator;
 import tech.ermakovich.service.MessageSender;
+import tech.ermakovich.service.UserService;
 
 import static tech.ermakovich.utils.BotCommands.GENERATE_IDEA_BTN;
 
@@ -15,10 +17,13 @@ import static tech.ermakovich.utils.BotCommands.GENERATE_IDEA_BTN;
 public class GenerateIdeaHandler implements CommandHandler {
     private final AnswerGenerator answerGenerator;
     private final MessageSender messageSender;
+    private final UserService userService;
 
     @Override
     public void handle(long chatId, Update update) {
-        String message = answerGenerator.generate(chatId, "IT", 1);
+        User user = userService.getOrCreate(chatId);
+
+        String message = answerGenerator.generate(chatId, "SEX", 1);
         messageSender.sendMessage(chatId, message);
     }
 
