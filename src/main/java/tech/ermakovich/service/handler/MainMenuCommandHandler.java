@@ -9,8 +9,10 @@ import tech.ermakovich.service.AnswerGenerator;
 import tech.ermakovich.service.MessageSender;
 import tech.ermakovich.service.UserService;
 import tech.ermakovich.service.handler.command.CommandHandler;
+import tech.ermakovich.service.handler.command.DefaultCommandHandler;
 
 import java.util.Map;
+import java.util.Optional;
 
 import static tech.ermakovich.utils.ResponseConsts.USER_PROFILE;
 
@@ -19,35 +21,17 @@ import static tech.ermakovich.utils.ResponseConsts.USER_PROFILE;
 @Service
 public class MainMenuCommandHandler {
     private final Map<String, CommandHandler> commandHandlerMap;
-    private final UserService userService;
-    private final AnswerGenerator answerGenerator;
-    private final MessageSender messageSender;
+    private final DefaultCommandHandler defaultCommandHandler;
 
     public void handleCommand(Long chatId, String command, Update update) {
         CommandHandler commandHandler = commandHandlerMap.get(command);
+        if (commandHandler == null) {
+            commandHandler = defaultCommandHandler;
+        }
         commandHandler.handle(chatId, update);
     }
 
-    private void handleGetProfile(Long chatId) {
-        User user = userService.getById(chatId);
-        messageSender.sendMessage(chatId,
-                String.format(
-                        USER_PROFILE,
-                        user.getSubscriptions().getSources(),
-                        user.getBudget().getMax() + " " + user.getBudget().getCurrency(),
-                        "RB",
-                        "test",
-                        "test"
-                )
-        );
-    }
 
-    private void handleAnalyze(Long chatId) {
-        String message = answerGenerator.generate(chatId);
-        messageSender.sendMessage(chatId, message);
-    }
 
-    private void handleDefault(Long chatId, String command) {
-        log.info("CHAT_ID: {} | No supported command: {}", chatId, command);
-    }
+
 }

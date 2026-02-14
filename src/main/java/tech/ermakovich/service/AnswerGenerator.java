@@ -14,8 +14,8 @@ public class AnswerGenerator {
     private final NewsService newsService;
     private final AiAnalysisService analysisService;
 
-    public String generate(Long chatId) {
-        Mono<List<String>> latestNews = newsService.getLatestNews("IT", 5);
+    public String generate(Long chatId, String topic, int newsQuantity) {
+        Mono<List<String>> latestNews = newsService.getLatestNews(topic, newsQuantity);
         List<String> newsList = latestNews.block();
 
         if (newsList == null) {
