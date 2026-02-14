@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import tech.ermakovich.model.entity.User;
 import tech.ermakovich.service.UserService;
-import tech.ermakovich.service.handler.CommandHandler;
+import tech.ermakovich.service.handler.MainMenuCommandHandler;
 import tech.ermakovich.service.handler.MessageHandler;
 
 import static tech.ermakovich.utils.BotCommands.MAIN_MENU_BUTTONS;
@@ -15,7 +15,7 @@ import static tech.ermakovich.utils.BotCommands.MAIN_MENU_BUTTONS;
 @Slf4j
 @Service
 public class UpdateProcessor {
-    private final CommandHandler commandHandler;
+    private final MainMenuCommandHandler mainMenuCommandHandler;
     private final MessageHandler messageHandler;
     private final UserService userService;
 
@@ -33,7 +33,7 @@ public class UpdateProcessor {
 
             try {
                 if (isCommand(messageText)) {
-                    commandHandler.handleCommand(chatId, messageText);
+                    mainMenuCommandHandler.handleCommand(chatId, messageText, update);
                 } else {
                     messageHandler.handleMessage(chatId, messageText, username);
                 }
