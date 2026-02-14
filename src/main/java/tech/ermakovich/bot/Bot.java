@@ -10,7 +10,7 @@ import org.telegram.telegrambots.longpolling.interfaces.LongPollingUpdateConsume
 import org.telegram.telegrambots.meta.api.objects.Update;
 import tech.ermakovich.config.BotConfig;
 import tech.ermakovich.service.handler.GlobalUpdateExceptionHandler;
-import tech.ermakovich.service.processor.UpdateProcessor;
+import tech.ermakovich.service.processor.update.CommonUpdateProcessor;
 
 import java.util.List;
 
@@ -21,15 +21,15 @@ public class Bot implements LongPollingUpdateConsumer {
     private TelegramBotsLongPollingApplication botsApplication;
     private final BotConfig botConfig;
     private final GlobalUpdateExceptionHandler exceptionHandler;
-    private final UpdateProcessor updateProcessor;
+    private final CommonUpdateProcessor commonUpdateProcessor;
 
     public Bot(BotConfig botConfig,
                GlobalUpdateExceptionHandler exceptionHandler,
-               UpdateProcessor updateProcessor
+               CommonUpdateProcessor commonUpdateProcessor
     ) {
         this.botConfig = botConfig;
         this.exceptionHandler = exceptionHandler;
-        this.updateProcessor = updateProcessor;
+        this.commonUpdateProcessor = commonUpdateProcessor;
     }
 
     @Override
@@ -49,7 +49,7 @@ public class Bot implements LongPollingUpdateConsumer {
                 log.warn("Received null update, skipping");
                 return;
             }
-            updateProcessor.process(update);
+            commonUpdateProcessor.process(update);
         } catch (Exception e) {
             exceptionHandler.handleException(update, e);
         }

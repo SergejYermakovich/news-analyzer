@@ -24,14 +24,7 @@ public class MainMenuCommandHandler {
     private final DefaultCommandHandler defaultCommandHandler;
 
     public void handleCommand(Long chatId, String command, Update update) {
-        CommandHandler commandHandler = commandHandlerMap.get(command);
-        if (commandHandler == null) {
-            commandHandler = defaultCommandHandler;
-        }
+        CommandHandler commandHandler = commandHandlerMap.getOrDefault(command, defaultCommandHandler);
         commandHandler.handle(chatId, update);
     }
-
-
-
-
 }
