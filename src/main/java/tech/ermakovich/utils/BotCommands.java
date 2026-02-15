@@ -7,7 +7,6 @@ import java.util.Set;
 @UtilityClass
 public class BotCommands {
     public static final String START = "/start";
-    public static final String ANALYZE = "/analyze";
     public static final String GENERATE_IDEA_BTN = "🚀 Сгенерировать идею";
     public static final String MY_SOURCES_BTN = "📰 Мои источники";
     public static final String BUDGET_BTN = "💰 Бюджет";

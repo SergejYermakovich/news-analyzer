@@ -27,9 +27,8 @@ public class GetProfileHandler implements CommandHandler {
                         USER_PROFILE,
                         user.getSubscriptions().getSources(),
                         user.getBudget().getMax() + " " + user.getBudget().getCurrency(),
-                        "RB",
-                        "test",
-                        "test"
+                        user.getDeliverySettings().getFrequency(),
+                        user.getDeliverySettings().getFormat()
                 )
         );
     }
