@@ -14,7 +14,6 @@ public class ResponseConsts {
             
             📰 Подписки: %s
             💰 Бюджет: %s
-            🌍 Гео: %s
             📅 Рассылка: %s
             ⚙️ Формат: %s
             """;

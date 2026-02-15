@@ -36,7 +36,9 @@ public class NewsService {
 
         return webClient.get()
                 .uri(uriBuilder -> uriBuilder
-                        .path("/everything")
+                        .scheme("https")
+                        .host("newsapi.org")
+                        .path("/v2/everything")
                         .queryParam("q", topic)
                         .queryParam("from", fromDate)
                         .queryParam("sortBy", "publishedAt")

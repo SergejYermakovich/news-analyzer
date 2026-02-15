@@ -3,7 +3,6 @@ package tech.ermakovich.service.handler.command;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import tech.ermakovich.service.AnswerGenerator;
 import tech.ermakovich.service.KeyboardService;
 import tech.ermakovich.service.MessageSender;
 

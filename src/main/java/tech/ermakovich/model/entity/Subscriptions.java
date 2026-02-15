@@ -4,11 +4,12 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
 public class Subscriptions {
-    private List<String> sources;
-    private List<String> categories;
-    private List<String> keywords;
+    private Set<String> sources;
+    private Set<String> categories;
+    private Set<String> keywords;
 }

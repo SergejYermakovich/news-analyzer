@@ -18,8 +18,8 @@ public class AnswerGenerator {
         Mono<List<String>> latestNews = newsService.getLatestNews(topic, newsQuantity);
         List<String> newsList = latestNews.block();
 
-        if (newsList == null) {
-            return "lalalala";
+        if (newsList == null || newsList.isEmpty()) {
+            return "mock";
         }
 
         StringBuilder stringBuilder = new StringBuilder();
